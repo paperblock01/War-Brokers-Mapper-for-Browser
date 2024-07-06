@@ -1,22 +1,24 @@
- x = "";
+async function get_server_data(region) {
+  const res = await fetch(`https://store1.warbrokers.io/295//server_list.php?location=${region}`);
 
-fetch("https://store1.warbrokers.io/295//server_list.php?location=USA")
-  .then(res => {
-    if (res.ok) {
-      console.log("Fetch Request SUCCESS");
-    } else {
-      console.log("Fetch Request FAILED");
-    }
-    return res.text();
-  })
-  .then(data => {
+  if (res.ok) {
+    console.log("Fetch Request SUCCESS");
+    const data = await res.text();
+
     if (data === "0") {
-      console.log("[ERROR]: Unknown region!");
-      process.exit(1)
+      console.error("[ERROR]: Unknown region!");
+      throw new Error("Unknown region!");
     }
 
-    console.log(data);
-    x = data
-  })
+    // Return an organized array of each data value
+    return data.split(`,${region},`);
+  } else {
+    console.error("Fetch Request FAILED");
+    throw new Error("Fetch request failed");
+  }
+}
 
-  document.getElementById("x").innerHTML = x;
+// Usage
+x = get_server_data('USA').then(data => console.log(data)).catch(error => console.error(error))
+
+console.log(x);
