@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>War Brokers Mapper</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div class="settings">
+      <div id="title">
+        <h1>War Brokers Mapper</h1>
+      </div>
+
+
+
+      <div class="selections">
+        <div class="options">
+
+          <select id="game" onclick="if_4v4(this.id,'add_modes','modes_select','modes_list')">
+            <option value="classic">Classic</option>
+            <option value="4v4">4v4</option>
+          </select>
+          <input type="checkbox" id="alert">Alert Noise</input>
+          <input type="checkbox" id="infinite">Infinite Mapping</input>
+        </div>
+
+        <div class="box">
+          <h3>Players</h3>
+          <select id="sign">
+            <option value="Greater">Greater</option>
+            <option value="Less">Less</option>
+          </select>
+
+          than or equal to,
+
+          <select id="players">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+          </select>
+
+          player(s).
+
+        </div>
+
+        <div class="box">
+          <h3>Modes</h3>
+
+          <div class="_add" id="add_modes">
+            <div class="results">
+
+              <div class="_select" id="modes_select"></div>
+
+              <div class="_find" id="modes_find">
+                <span class="search" onclick="search('mode_search','modes_list')">
+                  <input class="input" id="mode_search" type="text" placeholder="Find a mode..." onkeyup="search('mode_search','modes_list')">
+                  <button onclick="clearsearch('mode_search')">X</button>
+                </span>
+                <div class="_list" id="modes_list"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3>Maps</h3>
+
+          <div class="_add" id="add_maps">
+            <div class="results">
+
+              <div class="_select" id="maps_select"></div>
+
+              <div class="_find" id="maps_find">
+                <span class="search" onclick="search('map_search','maps_list')">
+                  <input class="input" id="map_search" type="text" placeholder="Find a map..." onkeyup="search('map_search','maps_list')">
+                  <button onclick="clearsearch('map_search')">X</button>
+                </span>
+                <div class="_list" id="maps_list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3>Regions</h3>
+
+          <div class="_add" id="add_regions">
+            <div class="results">
+
+              <div class="_select" id="regions_select"></div>
+
+              <div class="_find" id="regions_find">
+                <span class="search" onclick="search('region_search','regions_list')">
+                  <input class="input" id="region_search" type="text" placeholder="Find a region..." onkeyup="search('region_search','regions_list')">
+                  <button onclick="clearsearch('region_search')">X</button>
+                </span>
+                <div class="_list" id="regions_list"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button onclick="submit()">submit</button>
+
+    </div>
+
+    <div id="output"></div>
+
+  </body>
+  <script src="./data.js"></script>
+  <script src="./wb_mapper.js"></script>
+  <script src="./index.js" type="text/javascript"></script>
+</html>
