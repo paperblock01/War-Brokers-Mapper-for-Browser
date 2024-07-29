@@ -354,9 +354,5 @@ function wb_mapper(id) {
 
 
 
-wb_mapper();
-
-
-
 
 
