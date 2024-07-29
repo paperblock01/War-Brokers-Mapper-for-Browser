@@ -1,39 +1,49 @@
 * {
     font-family: sans-serif;
-    border: solid 1px black;
     text-align: center;
 }
 
 h1,h2,h3 {
     margin: 2px;
-    padding: 0px;
+    padding-left: 5px;
 }
-
 h3 {
+    text-align: left;
     text-decoration: underline;
 }
-
+footer {
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border: 1px solid black;
+}
+.part {
+    display: flex;
+    justify-content: space-between;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
 .settings {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     margin: 0px;
+    width: 100%;
     max-width: 600px;
     border: solid 1px black;
-}
-.options {
-    border: solid 1px black;
-}
-.selections {
-
+    justify-content: space-between;
 }
 .box {
     flex-grow: 1;
+    flex-direction:row;
     margin: 2px;
     border: solid 1px black;
 }
 
 .results {
+    border: solid 1px black;
     display: flex;
     flex-direction: row;
     flex: 1;
@@ -41,22 +51,29 @@ h3 {
 }
 ._add {
     height: 300px;
+    display: none;
 }
 ._select {
+    border: solid 1px black;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     width: 50%;
     overflow-y: auto;
 }
-
+._select span {
+    border: solid 1px black;
+    text-align: right;
+    width:100%;
+}
 ._find {
-    visibility: hidden;
+    border: solid 1px black;
     display: flex;
     flex-direction: column;
     width: 50%;
 }
 ._list {
+    border: solid 1px black;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -69,13 +86,20 @@ h3 {
 .input {
     width: 100%;
 }
+#title {
+    border: solid 1px black;
+}
+#mapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#output {
+    border: solid 1px black;
+    width: 100%;
+    max-width: 600px;
+}
+#output * {
+    text-align:left;
+}
 
-#add_modes:hover #modes_find {
-    visibility: visible;
-}
-#add_maps:hover #maps_find {
-    visibility: visible;
-}
-#add_regions:hover #regions_find {
-    visibility: visible;
-}

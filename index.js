@@ -1,4 +1,18 @@
 
+let end = false;
+
+function collapse(part, self) {
+    let id = document.getElementById("add_" + part);
+    let img = document.getElementById(self);
+    if (id.style.display === "none") {
+        id.style.display = "block";
+        img.src = "./Assets/arrow_down_icon.png";
+    } else {
+        id.style.display = "none";
+        img.src = "./Assets/arrow_up_icon.png";
+    }
+}
+
 function search(value, list) {
     let input = document.getElementById(value).value.toLowerCase();
     let terms = document.getElementById(list);
@@ -54,13 +68,15 @@ function populate(base, list) {
 
 function if_4v4(id, add, select, list) {
     let game = document.getElementById(id);
-    let mode = document.getElementById(add);
+    let mode = document.getElementById("mode");
+    let modes = document.getElementById(add)
     let selected = document.getElementById(select);
     let listed = document.getElementById(list).getElementsByTagName('*');
 
     if (game.options[game.selectedIndex].text == "4v4") {
         mode.style.pointerEvents = "none";
         mode.style.backgroundColor = "gray";
+        modes.style.display = "none";
         selected.innerHTML = "";
         // Make all the mode buttons clickable if any were selected before
         for (let i=0; i<listed.length; i++) {
@@ -126,7 +142,7 @@ function collect_data(id) {
     }
 }
 
-function submit() {
+function start() {
 
     pre_data('game', 'alert', 'infinite', 'sign', 'players')
 
@@ -136,6 +152,9 @@ function submit() {
 
     wb_mapper("output");
 
+}
+function stop() {
+    vars["finite"] = true;
 }
 
 populate("modes", Modes_long)

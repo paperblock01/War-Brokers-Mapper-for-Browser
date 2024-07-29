@@ -1,19 +1,4 @@
 
-
-async function fetch_server_data(region) {
-  try {
-    const response = await fetch("https://store1.warbrokers.io/295//server_list.php?location="+region);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    // Return the raw server data
-    return response.text().then(data => data.split(","+region+","));
-  }
-  catch (error) {
-    console.error(error);
-  }
-}
-
 function set_data(game,players,mode,map,location) {
   // list for the finalized data
   let data = [];
@@ -255,15 +240,17 @@ function output(server_data, index, location) {
   // Find the name of the map on the server
   for (let j in Maps) {
     if (map == Maps[j]) {
-      map = j.toUpperCase();
-      break;
+      for (let k in Maps_long)
+        if (j == Maps_long[k]) {
+          map = k.toUpperCase();
+        }
     }
     else {
       continue;
     }
   }
 
-  return `${location} : ${mode} : ${map} (${data[2]}) : ${player} / 16 players\n`
+  return `<li>${location} : ${mode} : ${map} : ${player} / 16 players</li>`
 }
 
 function game_check(server_data, set_data, region) {
@@ -315,7 +302,7 @@ function wb_mapper(id) {
       // Number of servers that match
       let check = 0;
       // Stores the string that outputs information about the matching servers
-      let str_output = "";
+      let str_output = "<ul>";
 
       // Loop through all the set regions from settings
       for (let i=0; i<settings[4].length; i++) {
@@ -330,11 +317,12 @@ function wb_mapper(id) {
       }
 
       // Add part about matches
-      str_output += "- Found " + check + " match" + (check == 1? "!" : "es!\n")
+      str_output += "- Found " + check + " match" + (check == 1? "!" : "es!</ul>")
 
       // If more then 0 servers match
       if (check) {
-        document.getElementById(id).textContent = str_output;
+        console.log(str_output)
+        //document.getElementById(id).textContent = str_output;
       }
 
       // If playalert is set, play the sound
@@ -349,6 +337,11 @@ function wb_mapper(id) {
 
       // Wait 30 seconds so the server isn't pinged forever
       await delay(30000)
+
+      // If finite is set, break the loop
+      if (vars["finite"]) {
+        break;
+      }
 
     }
   } catch (error) {
