@@ -155,6 +155,7 @@ function start() {
 }
 function stop() {
     vars["finite"] = true;
+    console.log(1);
 }
 
 populate("modes", Modes_long)
