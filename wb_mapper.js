@@ -1,3 +1,16 @@
+async function fetch_server_data(region) {
+  try {
+    const response = await fetch("https://store1.warbrokers.io/295//server_list.php?location="+region);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    // Return the raw server data
+    return response.text().then(data => data.split(","+region+","));
+  }
+  catch (error) {
+    console.error(error);
+  }
+}
 
 function set_data(game,players,mode,map,location) {
   // list for the finalized data
