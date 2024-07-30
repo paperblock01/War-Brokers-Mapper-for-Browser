@@ -1,12 +1,26 @@
 
-let end = false;
-
 function collapse(part, self) {
-    let id = document.getElementById("add_" + part);
+    // Part describes the index of the part
+    let parts = ["modes", "maps", "regions"];
+    let img_parts = ["mode", "map", "reg"];
+
+    let id = document.getElementById("add_" + parts[part]);
     let img = document.getElementById(self);
+
+    // Remove the selected part from the parts array
+    parts.splice(part, 1);
+    img_parts.splice(part, 1);
+
     if (id.style.display === "none") {
         id.style.display = "block";
         img.src = "./Assets/arrow_down_icon.png";
+
+        // Collapse the other dropdowns
+        for (let i=0; i<parts.length; i++) {
+            document.getElementById("add_" + parts[i]).style.display = "none";
+            document.getElementById(img_parts[i] + "_img").src = "./Assets/arrow_up_icon.png"
+        }
+
     } else {
         id.style.display = "none";
         img.src = "./Assets/arrow_up_icon.png";
@@ -33,31 +47,64 @@ function clearsearch(input) {
     document.getElementById(input).value = "";
 }
 
-function remove(el,item) {
+function remove(el,item, base) {
+    let selection = item.innerHTML;
+    let all = document.getElementById("all_" + base);
+    let preview = ", " + all.textContent;
+
     // Make the button clickable again, allowing you to add the item
     item.disabled = false;
+    // Remove the selected item from the list
     el.remove();
+
+    // Remove the selection from the preview
+    preview = preview.replace(", " + selection, "");
+
+    // If the comma and space are still there, remove them
+    if (preview[0] == ",") {
+        preview = preview.slice(2);
+    }
+
+    // If nothing remains
+    if (preview == "") {
+        preview = "All"
+    }
+
+    all.textContent = preview;
+
 }
 
-function select(item, display) {
-    selection = document.getElementById(item);
-    show = document.getElementById(display);
-    id = selection.value + "_select";
+function select(item, display, base) {
+    let selection = document.getElementById(item);
+    let show = document.getElementById(display);
+    let id = selection.value + "_select";
+    let all = document.getElementById("all_" + base);
+    let preview = all.textContent;
+
+    // If the preview contains "All", set it to ""
+    if (preview == "All") {
+        preview = selection.innerHTML;
+    } else {
+        preview += ", " + selection.innerHTML;
+    }
+
+    all.textContent = preview;
+
 
     // Disable the button that allowed you to add it
     selection.disabled = true;
 
-    show.innerHTML += `<span id="${id}"><a>${selection.innerHTML}</a> <button onclick="remove(${id},${item})">X</button><span>`
+    // Add what was selected to the base_select div
+    show.innerHTML += `<span id="${id}"><a>${selection.innerHTML}</a> <button onclick="remove(${id},${item},'${base}')">X</button>&nbsp;&nbsp;<span>`
 }
 
-// Display all the list names in the id of the div
 function populate(base, list) {
     let id = base + "_list";
     let select = base + "_select"
     let modes = "";
 
     for (let i in list) {
-        modes += `<button value="${list[i]}" id="${list[i]}" onclick="select(this.value,'${select}')">${i}</button>`
+        modes += `<button value="${list[i]}" id="${list[i]}" onclick="select(this.value,'${select}','${base}')">${i}</button>`
     }
 
     // First clear anything there before
@@ -66,6 +113,7 @@ function populate(base, list) {
     document.getElementById(id).innerHTML = modes;
 }
 
+// Messy ass function that is quite unreuseable. Good luck figureing it out me in the future.
 function if_4v4(id, add, select, list) {
     let game = document.getElementById(id);
     let mode = document.getElementById("mode");
@@ -77,7 +125,20 @@ function if_4v4(id, add, select, list) {
         mode.style.pointerEvents = "none";
         mode.style.backgroundColor = "gray";
         modes.style.display = "none";
+        document.getElementById("mode_img").src = "./Assets/arrow_up_icon.png"
+        document.getElementById("all_modes").textContent = "All";
+        document.getElementById("all_maps").textContent = "All";
+        document.getElementById("all_regions").textContent = "All";
+
+        // Remove all the selected things
         selected.innerHTML = "";
+        document.getElementById("maps_select").innerHTML = "";
+        document.getElementById("regions_select").innerHTML = "";
+
+        // Change the spawn for 4v4
+        populate("maps", Fourv4_maps)
+        populate("regions", Fourv4_regions)
+
         // Make all the mode buttons clickable if any were selected before
         for (let i=0; i<listed.length; i++) {
             listed[i].disabled = false;
@@ -154,8 +215,8 @@ function start() {
 
 }
 function stop() {
-    vars["finite"] = true;
-    console.log(1);
+    vars["stop"] = true;
+    console.log("Stopping...");
 }
 
 populate("modes", Modes_long)

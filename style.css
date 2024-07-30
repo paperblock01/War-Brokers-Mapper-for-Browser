@@ -2,7 +2,6 @@
     font-family: sans-serif;
     text-align: center;
 }
-
 h1,h2,h3 {
     margin: 2px;
     padding-left: 5px;
@@ -18,6 +17,9 @@ footer {
     width: 100%;
     border: 1px solid black;
 }
+button:hover {
+    cursor: pointer;
+}
 .part {
     display: flex;
     justify-content: space-between;
@@ -26,6 +28,7 @@ footer {
     user-select: none; /* Standard syntax */
 }
 .settings {
+    background-color: #756e5b;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -35,7 +38,11 @@ footer {
     border: solid 1px black;
     justify-content: space-between;
 }
+.options {
+    background-color: white;
+}
 .box {
+    background-color: white;
     flex-grow: 1;
     flex-direction:row;
     margin: 2px;
@@ -49,11 +56,19 @@ footer {
     flex: 1;
     height: 100%;
 }
+.all_ {
+    text-decoration: none;
+    width: 100%;
+    height: 30px;
+    text-align: left;
+    overflow: hidden;
+}
 ._add {
     height: 300px;
     display: none;
 }
 ._select {
+    background-color: #a09a84;
     border: solid 1px black;
     flex-grow: 1;
     display: flex;
@@ -62,6 +77,8 @@ footer {
     overflow-y: auto;
 }
 ._select span {
+    background-color: #cfb59f;
+    margin: 2px;
     border: solid 1px black;
     text-align: right;
     width:100%;
@@ -86,6 +103,12 @@ footer {
 .input {
     width: 100%;
 }
+.map {
+    border: 1px solid black;
+    color: white;
+} .map:hover {
+    border: 1px solid white;
+}
 #title {
     border: solid 1px black;
 }
@@ -102,4 +125,9 @@ footer {
 #output * {
     text-align:left;
 }
-
+#start {
+    background-color: green;
+}
+#stop {
+    background-color: #db2b39;
+}

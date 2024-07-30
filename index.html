@@ -7,126 +7,136 @@
   </head>
   <body>
     <div id="mapper">
-    <div class="settings">
-      <div id="title">
-        <img style="border:none" src="./Assets/ui_logo_200.png">
-        <h1>War Brokers Mapper</h1>
+      <div class="settings">
+        <div id="title">
+          <img style="border:none" src="./Assets/ui_logo_200.png">
+          <h1>War Brokers Mapper</h1>
+        </div>
+    <!--Options-->
+          <div class="options">
+
+            <select id="game" onclick="if_4v4(this.id,'add_modes','modes_select','modes_list')">
+              <option value="classic" selected>Classic</option>
+              <option value="4v4">4v4</option>
+            </select>
+            <input type="checkbox" id="alert" checked>Alert Noise</input>
+            <input type="checkbox" id="infinite">Infinite Mapping</input>
+          </div>
+    <!--Players-->
+          <div class="box">
+            <h3>Players</h3>
+            <div style="">
+            <select id="sign">
+              <option value="Greater" selected>Greater</option>
+              <option value="Less">Less</option>
+            </select>
+
+            than or equal to,
+
+            <select id="players" options="1">
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+            </select>
+
+            player(s).
+            </div>
+          </div>
+    <!--Modes-->
+          <div class="box" id="mode">
+            <span class="part" onclick="collapse(0,'mode_img')">
+              <h3>Modes:</h3>
+              <h3 class="all_" id="all_modes">All</h3>
+              <img id="mode_img" style="height:30px" src="./Assets/arrow_up_icon.png">
+            </span>
+
+            <div style="display:none" class="_add" id="add_modes">
+              <div class="results">
+
+                <div class="_select" id="modes_select"></div>
+
+                <div class="_find" id="modes_find">
+                  <span class="search" onclick="search('mode_search','modes_list')">
+                    <input class="input" id="mode_search" type="text" placeholder="Find a mode..." onkeyup="search('mode_search','modes_list')">
+                    <button onclick="clearsearch('mode_search')">X</button>
+                  </span>
+                  <div class="_list" id="modes_list"></div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+    <!--Maps-->
+          <div class="box">
+            <span class="part" onclick="collapse(1,'map_img')">
+              <h3>Maps:</h3>
+              <h3 class="all_" id="all_maps">All</h3>
+              <img id="map_img" style="height:30px" src="./Assets/arrow_up_icon.png">
+            </span>
+
+            <div style="display:none" class="_add" id="add_maps">
+              <div class="results">
+
+                <div class="_select" id="maps_select"></div>
+
+                <div class="_find" id="maps_find">
+                  <span class="search" onclick="search('map_search','maps_list')">
+                    <input class="input" id="map_search" type="text" placeholder="Find a map..." onkeyup="search('map_search','maps_list')">
+                    <button onclick="clearsearch('map_search')">X</button>
+                  </span>
+                  <div class="_list" id="maps_list"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+    <!--Regions-->
+          <div class="box">
+            <span class="part" onclick="collapse(2,'reg_img')">
+              <h3>Regions:</h3>
+              <h3 class="all_" id="all_regions">All</h3>
+              <img id="reg_img" style="height:30px" src="./Assets/arrow_up_icon.png">
+            </span>
+
+            <div style="display:none" class="_add" id="add_regions">
+              <div class="results">
+
+                <div class="_select" id="regions_select"></div>
+
+                <div class="_find" id="regions_find">
+                  <span class="search" onclick="search('region_search','regions_list')">
+                    <input class="input" id="region_search" type="text" placeholder="Find a region..." onkeyup="search('region_search','regions_list')">
+                    <button onclick="clearsearch('region_search')">X</button>
+                  </span>
+                  <div class="_list" id="regions_list"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        <button class="map" id="start" onclick="start()">START</button>
+        <button class="map" id="stop" onclick="stop()">STOP</button>
+
       </div>
-  <!--Options-->
-        <div class="options">
 
-          <select id="game" onclick="if_4v4(this.id,'add_modes','modes_select','modes_list')">
-            <option value="classic" selected>Classic</option>
-            <option value="4v4">4v4</option>
-          </select>
-          <input type="checkbox" id="alert">Alert Noise</input>
-          <input type="checkbox" id="infinite">Infinite Mapping</input>
-        </div>
-  <!--Players-->
-        <div class="box">
-          <h3>Players</h3>
-          <select id="sign">
-            <option value="Greater" selected>Greater</option>
-            <option value="Less">Less</option>
-          </select>
-
-          than or equal to,
-
-          <select id="players" options="1">
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-          </select>
-
-          player(s).
-
-        </div>
-  <!--Modes-->
-        <div class="box" id="mode">
-          <span class="part" onclick="collapse('modes','mode_img')"><h3>Modes</h3> <img id="mode_img" style="height:30px" src="./Assets/arrow_up_icon.png"></span>
-
-          <div style="display:none" class="_add" id="add_modes">
-            <div class="results">
-
-              <div class="_select" id="modes_select"></div>
-
-              <div class="_find" id="modes_find">
-                <span class="search" onclick="search('mode_search','modes_list')">
-                  <input class="input" id="mode_search" type="text" placeholder="Find a mode..." onkeyup="search('mode_search','modes_list')">
-                  <button onclick="clearsearch('mode_search')">X</button>
-                </span>
-                <div class="_list" id="modes_list"></div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-  <!--Maps-->
-        <div class="box">
-          <span class="part" onclick="collapse('maps','map_img')"><h3>Maps</h3> <img id="map_img" style="height:30px" src="./Assets/arrow_up_icon.png"></span>
-
-          <div style="display:none" class="_add" id="add_maps">
-            <div class="results">
-
-              <div class="_select" id="maps_select"></div>
-
-              <div class="_find" id="maps_find">
-                <span class="search" onclick="search('map_search','maps_list')">
-                  <input class="input" id="map_search" type="text" placeholder="Find a map..." onkeyup="search('map_search','maps_list')">
-                  <button onclick="clearsearch('map_search')">X</button>
-                </span>
-                <div class="_list" id="maps_list"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-  <!--Regions-->
-        <div class="box">
-          <span class="part" onclick="collapse('regions','reg_img')"><h3>Regions</h3> <img id="reg_img" style="height:30px" src="./Assets/arrow_up_icon.png"></span>
-
-          <div style="display:none" class="_add" id="add_regions">
-            <div class="results">
-
-              <div class="_select" id="regions_select"></div>
-
-              <div class="_find" id="regions_find">
-                <span class="search" onclick="search('region_search','regions_list')">
-                  <input class="input" id="region_search" type="text" placeholder="Find a region..." onkeyup="search('region_search','regions_list')">
-                  <button onclick="clearsearch('region_search')">X</button>
-                </span>
-                <div class="_list" id="regions_list"></div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      <button onclick="start()">Start</button>
-      <button onclick="stop()">Stop</button>
-
-    </div>
-    </div>
-
-    <div id="output">
-    <ul><li>USA : TEAM DEATH MATCH : DESERT : 15 / 16 players</li><li>USA : TEAM DEATH MATCH : ESCAPE : 14 / 16 players</li><li>USA : TEAM DEATH MATCH : NORTHWEST : 6 / 16 players</li><li>USA_WEST : TEAM DEATH MATCH : HEIST : 12 / 16 players</li><li>USA_WEST : TEAM DEATH MATCH : FRONTIER : 5 / 16 players</li><li>ASIA : TEAM DEATH MATCH : SOUTHWEST : 11 / 16 players</li><li>JAPAN : TEAM DEATH MATCH : ESCAPE : 6 / 16 players</li><li>EUROPE : TEAM DEATH MATCH : DESERT : 16 / 16 players</li><li>EUROPE : TEAM DEATH MATCH : CITY POINT : 12 / 16 players</li><li>INDIA : TEAM DEATH MATCH : ESCAPE : 9 / 16 players</li><li>AUSTRALIA : TEAM DEATH MATCH : TRIBUTE : 6 / 16 players</li><li>RUSSIA : TEAM DEATH MATCH : THE SOMME : 9 / 16 players</li>- Found 12 matches!</ul>
+      <div id="output">
 
 
-    </div>
 
-
+      </div>
     </div>
 
     <br>

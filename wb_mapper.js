@@ -1,3 +1,4 @@
+
 async function fetch_server_data(region) {
   try {
     const response = await fetch("https://store1.warbrokers.io/295//server_list.php?location="+region);
@@ -302,7 +303,6 @@ function game_check(server_data, set_data, region) {
   return [check, str_output];
 }
 
-// Set delay that delays the program
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -311,7 +311,17 @@ function wb_mapper(id) {
 (async () => {
   try {
     settings = set_data(vars["game"],vars["players"],vars["mode"],vars["map"],vars["location"]);
+    // So the loop can run
+    vars["stop"] = false;
+
     while (true) {
+
+      // If the program should stop
+      if (vars["stop"]) {
+        console.log("Stopping...");
+        break;
+      }
+
       // Number of servers that match
       let check = 0;
       // Stores the string that outputs information about the matching servers
@@ -334,24 +344,19 @@ function wb_mapper(id) {
 
       // If more then 0 servers match
       if (check) {
-        console.log(str_output)
-        //document.getElementById(id).textContent = str_output;
+        document.getElementById(id).textContent = str_output;
+      } else {
+        // Wait 30 seconds so the server isn't pinged forever
+        await delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
+        continue;
       }
 
       // If playalert is set, play the sound
       if (vars["playalert"]) {
-
+        let audio = new Audio('./Assets/alert.wav');
+        audio.play();
       }
 
-      // If finite is set, break the loop
-      if (vars["finite"]) {
-        break;
-      }
-
-      // Wait 30 seconds so the server isn't pinged forever
-      await delay(30000)
-
-      // If finite is set, break the loop
       if (vars["finite"]) {
         break;
       }
@@ -364,8 +369,4 @@ function wb_mapper(id) {
 
 })();
 }
-
-
-
-
 

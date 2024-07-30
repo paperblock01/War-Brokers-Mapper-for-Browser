@@ -1,4 +1,3 @@
-
 // Default program arguments
 // players: true stands greater than or equal and false stands for less than or equal
 let vars = {
@@ -9,8 +8,8 @@ let vars = {
   "location": "",
   "playalert": true,
   "finite": true,
+  "stop": false,
 }
-
 // Data for the wb_mapper stript
 const Modes = {
     "tdm": 128,
