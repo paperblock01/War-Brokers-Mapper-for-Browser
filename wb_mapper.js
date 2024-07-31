@@ -362,8 +362,8 @@ function wb_mapper(id) {
         break;
       }
 
-      // Wait 50 seconds so the server isn't pinged forever
-      await delay(50000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
+      // Wait 30 seconds so the server isn't pinged forever
+      await delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
 
     }
   } catch (error) {
