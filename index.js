@@ -1,4 +1,16 @@
+function setup(gameid, alertid, infiniteid, signid, playerid) {
+    let game = document.getElementById(gameid);
+    let alert = document.getElementById(alertid);
+    let infinite = document.getElementById(infiniteid);
+    let sign = document.getElementById(signid);
+    let player = document.getElementById(playerid);
 
+    game.selectedIndex = 0;
+    alert.checked = true;
+    infinite.checked = false;
+    sign.selectedIndex = 0;
+    player.selectedIndex = 0;
+}
 function collapse(part, self) {
     // Part describes the index of the part
     let parts = ["modes", "maps", "regions"];
@@ -147,6 +159,10 @@ function if_4v4(id, add, select, list) {
     } else if (game.options[game.selectedIndex].text == "Classic") {
         mode.style.pointerEvents = "auto";
         mode.style.backgroundColor = "white";
+
+        // Change the spawn for Classic
+        populate("maps", Classic_maps)
+        populate("regions", Classic_regions)
     }
 
 }
@@ -219,6 +235,7 @@ function stop() {
     console.log("Stopping...");
 }
 
+setup('game','alert','infinite','sign','players')
 populate("modes", Modes_long)
 populate("maps", Classic_maps)
 populate("regions", Classic_regions)

@@ -17,8 +17,16 @@ footer {
     width: 100%;
     border: 1px solid black;
 }
+select {
+    border: 1px solid black;
+    margin: 2px;
+}
 button:hover {
     cursor: pointer;
+}
+.check {
+    margin: 1px;
+    background-color: #d2d3c7;
 }
 .part {
     display: flex;
