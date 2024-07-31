@@ -7,7 +7,6 @@ let vars = {
   "map": "",
   "location": "",
   "playalert": true,
-  "finite": true,
   "stop": false,
 }
 // Data for the wb_mapper stript

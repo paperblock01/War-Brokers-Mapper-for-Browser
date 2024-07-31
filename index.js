@@ -1,13 +1,11 @@
-function setup(gameid, alertid, infiniteid, signid, playerid) {
+function setup(gameid, alertid, signid, playerid) {
     let game = document.getElementById(gameid);
     let alert = document.getElementById(alertid);
-    let infinite = document.getElementById(infiniteid);
     let sign = document.getElementById(signid);
     let player = document.getElementById(playerid);
 
     game.selectedIndex = 0;
     alert.checked = true;
-    infinite.checked = false;
     sign.selectedIndex = 0;
     player.selectedIndex = 0;
 }
@@ -168,16 +166,14 @@ function if_4v4(id, add, select, list) {
 
 }
 
-function pre_data(gameid, alertid, infiniteid, signid, playersid) {
+function pre_data(gameid, alertid, signid, playersid) {
     let game = document.getElementById(gameid);
     let alert = document.getElementById(alertid);
-    let infinite = document.getElementById(infiniteid);
     let sign = document.getElementById(signid);
     let players = document.getElementById(playersid);
 
     let select_game = game.options[game.selectedIndex].text;
     let select_alert = alert.checked;
-    let select_infinite = infinite.checked;
     let select_sign = sign.options[sign.selectedIndex].text
     let select_players = players.options[players.selectedIndex].text
 
@@ -188,7 +184,6 @@ function pre_data(gameid, alertid, infiniteid, signid, playersid) {
     }
 
     vars["playalert"] = select_alert;
-    vars["finite"] = !select_infinite
     vars["game"] = select_game;
     vars["players"] = [select_sign, parseInt(select_players)];
 }
@@ -222,7 +217,7 @@ function collect_data(id) {
 
 function start() {
 
-    pre_data('game', 'alert', 'infinite', 'sign', 'players')
+    pre_data('game', 'alert', 'sign', 'players')
 
     vars["mode"] = collect_data("modes_list")
     vars["map"] = collect_data("maps_list")
@@ -246,7 +241,7 @@ document.addEventListener('visibilitychange', function(e) {
     }
 });
 
-setup('game','alert','infinite','sign','players')
+setup('game','alert','sign','players')
 populate("modes", Modes_long)
 populate("maps", Classic_maps)
 populate("regions", Classic_regions)

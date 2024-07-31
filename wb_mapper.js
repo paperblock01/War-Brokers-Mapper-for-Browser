@@ -306,7 +306,7 @@ function game_check(server_data, set_data, region) {
   // Return the number of servers that match and the output string
   return [check, str_output];
 }
-// The function is bugged af, but I stole it from someone on the internet. It works fine in node.js, just not the browser. In the wb_mapper function, it delays, but only for about 45 seconds. The rest of the code runs, and it then delays for 5 seconds. So the server is pinged more than once every 50 seconds, but that still doesn't count as excessive pinging
+
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -358,9 +358,7 @@ function wb_mapper(id) {
           let audio = new Audio('./Assets/alert.wav');
           audio.play();
         }
-      }
 
-      if (vars["finite"] && check) {
         break;
       }
 
