@@ -242,12 +242,14 @@ function output(server_data, index, location) {
   console.log(mode)
 
   // Find the name of the mode on the server
-  for (let i in Modes_long) {
-    console.log(i)
-    // If the mode on the server matches one of the predefined modes
-    if (mode = Modes_long[i]) {
-      mode = i.toUpperCase();
-      break;
+  for (let i in Modes) {
+    if (mode == Modes[i]) {
+      for (let l in Modes_long) {
+        if (i == Modes_long[l]) {
+          mode = l.toUpperCase();
+          break;
+        }
+      }
     }
     else {
       continue;
@@ -260,6 +262,7 @@ function output(server_data, index, location) {
       for (let k in Maps_long)
         if (j == Maps_long[k]) {
           map = k.toUpperCase();
+          break;
         }
     }
     else {
@@ -317,7 +320,7 @@ function wb_mapper(id) {
     // So the loop can run
     vars["stop"] = false;
 
-    while (true) {
+    while (!vars["stop"]) {
 
       // If the program should stop
       if (vars["stop"]) {
@@ -351,24 +354,26 @@ function wb_mapper(id) {
         document.getElementById(id).innerHTML = str_output;
         document.title = "(1) War Brokers Mapper";
         document.getElementById("status").innerHTML = "Finished!";
+
+        // If playalert is set, play the sound
+        if (vars["playalert"]) {
+          let audio = new Audio('./Assets/alert.wav');
+          audio.play();
+        }
+
+        if (vars["finite"]) {
+          break;
+        }
+
+        // Wait 30 seconds so the server isn't pinged forever
+        await delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
+
       } else {
         // Wait 30 seconds so the server isn't pinged forever
-        delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
+        await delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
         continue;
       }
 
-      // If playalert is set, play the sound
-      if (vars["playalert"]) {
-        let audio = new Audio('./Assets/alert.wav');
-        audio.play();
-      }
-
-      if (vars["finite"]) {
-        break;
-      }
-
-      // Wait 30 seconds so the server isn't pinged forever
-      delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
     }
   } catch (error) {
     // Handle errors here if necessary
