@@ -229,7 +229,8 @@ function start() {
     vars["location"] = collect_data("regions_list")
 
     wb_mapper("output");
-    document.getElementById("status").innerHTML = "Mapping, please wait..."
+    document.getElementById("output").innerHTML = "";
+    document.getElementById("status").innerHTML = "Mapping, please wait...";
 
 }
 
