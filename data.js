@@ -23,7 +23,7 @@ const Modes_long = {
     "Missile Launch": "ml",
     "Bomb Disposal": "bd",
     "Capture Points": "cp",
-    "Vechicle Escort": "ve",
+    "Vehicle Escort": "ve",
     "Gun Game": "gg",
 };
 const Maps = {
