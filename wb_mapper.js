@@ -350,7 +350,9 @@ function wb_mapper(id) {
       // If more then 0 servers match
       if (check) {
         document.getElementById(id).innerHTML = str_output;
-        document.title = "(1) War Brokers Mapper";
+        if (document.hidden) {
+          document.title = "(1) War Brokers Mapper";
+        }
         document.getElementById("status").innerHTML = "Finished!";
 
         // If playalert is set, play the sound
