@@ -239,8 +239,11 @@ function output(server_data, index, location) {
   let mode = parseInt(data[1]);
   let map = parseInt(data[3]);
 
+  console.log(mode)
+
   // Find the name of the mode on the server
   for (let i in Modes_long) {
+    console.log(i)
     // If the mode on the server matches one of the predefined modes
     if (mode = Modes_long[i]) {
       mode = i.toUpperCase();
@@ -350,7 +353,7 @@ function wb_mapper(id) {
         document.getElementById("status").innerHTML = "Finished!";
       } else {
         // Wait 30 seconds so the server isn't pinged forever
-        await delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
+        delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
         continue;
       }
 
@@ -365,7 +368,7 @@ function wb_mapper(id) {
       }
 
       // Wait 30 seconds so the server isn't pinged forever
-      await delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
+      delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
     }
   } catch (error) {
     // Handle errors here if necessary
