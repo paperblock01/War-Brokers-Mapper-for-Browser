@@ -19,8 +19,8 @@
               <option value="classic" selected>Classic</option>
               <option value="4v4">4v4</option>
             </select>
-            <span class="check"><input type="checkbox" id="alert">Alert Noise </input></span>
-            <span class="check"><input type="checkbox" id="infinite">Infinite Mapping </input></span>
+            <span class="check"><label><input type="checkbox" id="alert">Alert Noise </label></span>
+            <span class="check"><label><input type="checkbox" id="infinite">Infinite Mapping </label></span>
           </div>
     <!--Players-->
           <div class="box">
@@ -130,9 +130,11 @@
         <button class="map" id="start" onclick="start()">START</button>
         <button class="map" id="stop" onclick="stop()">STOP</button>
 
+        <span style="background-color:white;" id="status">Press START to start mapping for servers.</span>
+
       </div>
 
-      <div id="output"></div>
+        <div id="output"></div>
 
     </div>
 

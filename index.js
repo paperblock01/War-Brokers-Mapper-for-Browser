@@ -11,6 +11,7 @@ function setup(gameid, alertid, infiniteid, signid, playerid) {
     sign.selectedIndex = 0;
     player.selectedIndex = 0;
 }
+
 function collapse(part, self) {
     // Part describes the index of the part
     let parts = ["modes", "maps", "regions"];
@@ -228,12 +229,22 @@ function start() {
     vars["location"] = collect_data("regions_list")
 
     wb_mapper("output");
+    document.getElementById("status").innerHTML = "Mapping, please wait..."
 
 }
+
 function stop() {
     vars["stop"] = true;
     console.log("Stopping...");
+    document.getElementById("status").innerHTML = "Stopping..."
 }
+
+document.addEventListener('visibilitychange', function(e) {
+    let inactive = !document.hidden;
+    if (inactive) {
+        document.title = "War Brokers Mapper";
+    }
+});
 
 setup('game','alert','infinite','sign','players')
 populate("modes", Modes_long)

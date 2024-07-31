@@ -318,6 +318,7 @@ function wb_mapper(id) {
 
       // If the program should stop
       if (vars["stop"]) {
+        document.getElementById("status").innerHTML = "Stopped."
         console.log("Stopped.");
         break;
       }
@@ -345,6 +346,8 @@ function wb_mapper(id) {
       // If more then 0 servers match
       if (check) {
         document.getElementById(id).innerHTML = str_output;
+        document.title = "(1) War Brokers Mapper";
+        document.getElementById("status").innerHTML = "Finished!";
       } else {
         // Wait 30 seconds so the server isn't pinged forever
         await delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
