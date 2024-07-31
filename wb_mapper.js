@@ -239,8 +239,6 @@ function output(server_data, index, location) {
   let mode = parseInt(data[1]);
   let map = parseInt(data[3]);
 
-  console.log(mode)
-
   // Find the name of the mode on the server
   for (let i in Modes) {
     if (mode == Modes[i]) {
@@ -348,7 +346,7 @@ function wb_mapper(id) {
 
       // Add part about matches
       str_output += "- Found " + check + " match" + (check == 1? "!" : "es!</ul>")
-
+      console.log(check)
       // If more then 0 servers match
       if (check) {
         document.getElementById(id).innerHTML = str_output;
@@ -360,19 +358,16 @@ function wb_mapper(id) {
           let audio = new Audio('./Assets/alert.wav');
           audio.play();
         }
-
-        if (vars["finite"]) {
-          break;
-        }
-
-        // Wait 30 seconds so the server isn't pinged forever
-        await delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
-
-      } else {
-        // Wait 30 seconds so the server isn't pinged forever
-        await delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
-        continue;
       }
+
+      if (vars["finite"] && check) {
+        console.log("break");
+        break;
+      }
+
+      // Wait so the server isn't pinged forever
+      await delay(50000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
+      console.log("done waiting")
 
     }
   } catch (error) {

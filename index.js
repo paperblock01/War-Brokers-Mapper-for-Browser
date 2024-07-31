@@ -227,7 +227,6 @@ function start() {
     vars["mode"] = collect_data("modes_list")
     vars["map"] = collect_data("maps_list")
     vars["location"] = collect_data("regions_list")
-    console.log(vars)
     wb_mapper("output");
     document.getElementById("output").innerHTML = "";
     document.getElementById("status").innerHTML = "Mapping, please wait...";
