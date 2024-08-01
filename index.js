@@ -1,3 +1,96 @@
+function loadparas() {
+    const query = new URLSearchParams(window.location.search);
+    const game = query.get("game");
+    const alert = query.get("alert");
+    const player = query.get("players");
+    const mode = query.get("modes");
+    const map = query.get("maps");
+    const region = query.get("regions");
+
+    const game_select = document.getElementById("game");
+
+    // Game Mode
+    if (game != null) {
+        if (game.toLowerCase() != "4v4" == "classic" || null) {
+            game_select.selectedIndex = 0;
+        } else if (game.toLowerCase() == "4v4") {
+            game_select.selectedIndex = 1;
+            if_4v4("game","add_modes","modes_select","modes_list")
+        } else {
+            console.error("Unknown game '" + game + "'")
+        }
+    }
+
+    // Alert
+    if (alert != null) {
+        if (alert.toLowerCase() == "true") {
+            document.getElementById("alert").checked = true;
+        } else if (alert.toLowerCase() == "false") {
+            document.getElementById("alert").checked = false;
+        } else {
+            console.error("Unknown parameter '" + alert + "'");
+        }
+    }
+
+    // Players
+    if (player != null) {
+        let sign = player.slice(0,1);
+        let players = player.slice(1,player.length);
+        // Sign
+        if (sign.toLowerCase() == "g") {
+            document.getElementById("sign").selectedIndex = 0;
+        } else if (sign.toLowerCase() == "l") {
+            document.getElementById("sign").selectedIndex = 1;
+        } else {
+            console.error("Unknown sign '" + sign + "'");
+        }
+        // Num
+        if (!isNaN(parseInt(players))) {
+            if (parseInt(players) <= 16 && parseInt(players) >= 1) {
+                document.getElementById("players").selectedIndex = parseInt(players) - 1;
+            } else {
+                console.error("'" + players + "' is out of range.")
+            }
+        } else {
+            console.error("Unknown number '" + players + "'." )
+        }
+
+    }
+
+    // Mode
+    if (mode != null && game_select.selectedIndex != 1) {
+        modes = mode.split(",");
+        for (let i in modes) {
+            let select = document.getElementById(modes[i]);
+            if (select != null) {
+              select.click();
+            }
+        }
+    }
+
+    // Map
+    if (map != null) {
+        maps = map.split(",");
+        for (let i in maps) {
+            let select = document.getElementById(maps[i]);
+            if (select != null) {
+                select.click();
+            }
+        }
+    }
+
+    // Region
+    if (region != null) {
+        regions = region.split(",");
+        for (let i in regions) {
+            let select = document.getElementById(regions[i].toUpperCase());
+            if (select != null) {
+                select.click();
+            }
+        }
+    }
+}
+
 function setup(gameid, alertid, signid, playerid) {
     let game = document.getElementById(gameid);
     let alert = document.getElementById(alertid);
@@ -123,7 +216,6 @@ function populate(base, list) {
 
     document.getElementById(id).innerHTML = modes;
 }
-
 // Messy ass function that is quite unreuseable. Good luck figureing it out me in the future.
 function if_4v4(id, add, select, list) {
     let game = document.getElementById(id);
@@ -215,6 +307,50 @@ function collect_data(id) {
     }
 }
 
+function save_config() {
+    let game = document.getElementById("game");
+    let alert = document.getElementById("alert").checked;
+    let sign = document.getElementById("sign").selectedIndex;
+    let players = document.getElementById("players").selectedIndex;
+    let modes = collect_data("modes_list");
+    let maps = collect_data("maps_list");
+    let regions = collect_data("regions_list");
+
+    if (sign == 0) {
+        sign = "G";
+    } else {
+        sign = "L";
+    }
+
+    let params = window.location.href.split("?")[0] + "?game=" + game[game.selectedIndex].value + "&alert=" + alert + "&players=" + sign + (players + 1).toString();
+
+    if (modes != "") {
+        params += "&modes=" + modes;
+    }
+
+    if (maps != "") {
+        params += "&maps=" + maps;
+    }
+    if (regions != "") {
+        params += "&regions=" + regions;
+    }
+
+    return params
+}
+
+function show_config() {
+    let popup = document.getElementById("popup");
+    let link = document.getElementById("saved_config");
+
+    link.textContent = save_config();
+    link.href = save_config();
+    popup.style.display = "block";
+}
+
+function close_config() {
+    document.getElementById("popup").style.display = "none";
+}
+
 function start() {
 
     pre_data('game', 'alert', 'sign', 'players')
@@ -222,6 +358,7 @@ function start() {
     vars["mode"] = collect_data("modes_list")
     vars["map"] = collect_data("maps_list")
     vars["location"] = collect_data("regions_list")
+
     wb_mapper("output");
     document.getElementById("output").innerHTML = "";
     document.getElementById("status").innerHTML = "Mapping, please wait...";
@@ -234,9 +371,9 @@ function stop() {
     document.getElementById("status").innerHTML = "Stopping..."
 }
 
+// Change the title of the webpage
 document.addEventListener('visibilitychange', function(e) {
-    let inactive = !document.hidden;
-    if (inactive) {
+    if (!document.hidden) {
         document.title = "War Brokers Mapper";
     }
 });
@@ -245,4 +382,6 @@ setup('game','alert','sign','players')
 populate("modes", Modes_long)
 populate("maps", Classic_maps)
 populate("regions", Classic_regions)
+
+loadparas();
 
