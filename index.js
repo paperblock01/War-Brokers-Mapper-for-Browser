@@ -11,7 +11,7 @@ function loadparas() {
 
     // Game Mode
     if (game != null) {
-        if (game.toLowerCase() != "4v4" == "classic" || null) {
+        if (game.toLowerCase() == "classic") {
             game_select.selectedIndex = 0;
         } else if (game.toLowerCase() == "4v4") {
             game_select.selectedIndex = 1;
@@ -287,24 +287,17 @@ function collect_data(id) {
     let list = document.getElementById(id);
     let button = list.getElementsByTagName("button");
 
-    let count = 0;
     // Loop through each button and determine which are disabled.
     for (let i=0; i<button.length; i++) {
         // If the button is disabled
         if (button[i].disabled) {
             // Add the button's value to the data string
             data += button[i].value + ",";
-
-            count += 1;
         }
     }
 
-    if (data == "" || count == button.length) {
-        return "";
-    } else {
-        data = data.slice(0, -1);
-        return data;
-    }
+    data = data.slice(0, -1);
+    return data;
 }
 
 function save_config() {

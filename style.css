@@ -152,12 +152,16 @@ button:hover {
 }
 #popup {
     display: none;
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
-    margin-right: -50%;
+    margin-right: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid black;
     background-color: white;
+    max-width: 1000px;
     padding: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
