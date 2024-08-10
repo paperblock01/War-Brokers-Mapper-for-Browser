@@ -22,6 +22,14 @@
             <span class="check"><label><input type="checkbox" id="alert">Alert Noise </label></span>
             <button id="save" onclick="show_config()">Save Configuration</button>
           </div>
+
+          <div id="grayout">
+            <div id="popup">
+              <button id="close_popup" style="float: left;" onclick="close_config('grayout')">Close</button><br>
+              <a><b>Custom Configuration Save Link:</b></a><br>
+              <a id="saved_config" style="color: blue;" target="_blank" rel="noopener noreferrer"></a>
+            </div>
+          </div>
     <!--Players-->
           <div class="box">
             <h3>Players</h3>
@@ -138,11 +146,7 @@
 
     </div>
 
-    <div id="popup">
-        <button id="close_popup" style="float: left;" onclick="close_config()">Close</button><br>
-        <a><b>Custom Configuration Save Link:</b></a><br>
-        <a id="saved_config" style="color: blue;" target="_blank" rel="noopener noreferrer"></a>
-    </div>
+
 
     <br>
     <footer>| <a style="color:blue" href="https://github.com/paperblock01">paperblock01</a> | © 2024 | The War Brokers logo is property of <a style="color:blue" href="https://www.trebuchetent.com/">Trebuchet Entertainment LLC</a>. |</footer>

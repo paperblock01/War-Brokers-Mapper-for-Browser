@@ -332,7 +332,7 @@ function save_config() {
 }
 
 function show_config() {
-    let popup = document.getElementById("popup");
+    let popup = document.getElementById("grayout");
     let link = document.getElementById("saved_config");
 
     link.textContent = save_config();
@@ -340,8 +340,8 @@ function show_config() {
     popup.style.display = "block";
 }
 
-function close_config() {
-    document.getElementById("popup").style.display = "none";
+function close_config(id) {
+    document.getElementById(id).style.display = "none";
 }
 
 function start() {
