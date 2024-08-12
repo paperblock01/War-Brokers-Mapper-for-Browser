@@ -372,7 +372,7 @@ function wb_mapper(id, status, button) {
 
       // Wait 30 seconds so the server isn't pinged forever
       // DO NOT CHANGE THE 60, OR YOUR BROWSER WILL CRASH
-      for (let i in 60) {
+      for (let i=0; i<60; i++) {
         await delay(500)        // Check if the program is being stopped every half second
         if (vars["stop"]) {
           document.getElementById(status).innerHTML = "Stopped."
