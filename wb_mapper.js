@@ -353,6 +353,9 @@ function wb_mapper(id, status, button) {
       if (check) {
         document.getElementById(id).innerHTML = str_output;
         document.getElementById(status).innerHTML = "Finished!";
+
+        document.getElementById(button).value = "start";
+        document.getElementById(button).textContent = "START";
         document.getElementById(button).disabled = false;
         document.getElementById(button).style.backgroundColor = "green";
 
