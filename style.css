@@ -115,11 +115,11 @@ button:hover {
     width: 100%;
 }
 .map {
-    border: 1px solid black;
+    height: 30px;
+    border: solid 2px black;
     color: white;
-} .map:hover {
-    border: 1px solid white;
 }
+
 #title {
     border: solid 1px black;
 }
@@ -144,11 +144,8 @@ button:hover {
 #output * {
     text-align:left;
 }
-#start {
+#startstop {
     background-color: green;
-}
-#stop {
-    background-color: #db2b39;
 }
 #grayout {
     display: none;

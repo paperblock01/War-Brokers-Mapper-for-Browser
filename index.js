@@ -344,24 +344,75 @@ function close_config(id) {
     document.getElementById(id).style.display = "none";
 }
 
-function start() {
-
-    pre_data('game', 'alert', 'sign', 'players')
-
-    vars["mode"] = collect_data("modes_list")
-    vars["map"] = collect_data("maps_list")
-    vars["location"] = collect_data("regions_list")
-
-    wb_mapper("output");
-    document.getElementById("output").innerHTML = "";
-    document.getElementById("status").innerHTML = "Mapping, please wait...";
-
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function stop() {
-    vars["stop"] = true;
-    console.log("Stopping...");
-    document.getElementById("status").innerHTML = "Stopping..."
+
+let no = false;
+
+
+function what() {
+    if (no) {
+        console.log("stopped")
+        x = 1
+    }
+}
+
+function test() {
+    (async () => {
+    let x = 0;
+
+    while (!x) {
+        console.log(1);
+
+        for (let i=0; i<12; i++) {
+            await delay(500)
+            if (no) {
+                console.log("stopped")
+                document.getElementById("startstop").disabled = false;
+                no = true;
+                return;
+            }
+            console.log("waiting...")
+        }
+    }
+
+    })();
+}
+
+
+function startstop(id) {
+    let button = document.getElementById(id);
+
+    if (button.value == "start") {
+        pre_data('game', 'alert', 'sign', 'players')
+
+        vars["mode"] = collect_data("modes_list")
+        vars["map"] = collect_data("maps_list")
+        vars["location"] = collect_data("regions_list")
+
+        wb_mapper("output","status","startstop");
+
+        document.getElementById("output").innerHTML = "";
+        document.getElementById("status").innerHTML = "Mapping, please wait...";
+
+        button.textContent = "STOP";
+        button.value = "stop";
+        button.style.backgroundColor = "#db2b39";
+    } else if (button.value == "stop") {
+        no = true;
+
+        console.log("Stopping...");
+        document.getElementById("status").innerHTML = "Stopping...";
+
+        button.textContent = "START";
+        button.value = "start";
+        button.disabled = true;
+        button.style.backgroundColor = "gray";
+    } else {
+        console.error("Bro, wut?!");
+    }
 }
 
 // Change the title of the webpage

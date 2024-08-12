@@ -311,10 +311,10 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function wb_mapper(id) {
+function wb_mapper(id, status, button) {
 (async () => {
   try {
-    settings = set_data(vars["game"],vars["players"],vars["mode"],vars["map"],vars["location"]);
+    let settings = set_data(vars["game"],vars["players"],vars["mode"],vars["map"],vars["location"]);
     // So the loop can run
     vars["stop"] = false;
 
@@ -322,9 +322,11 @@ function wb_mapper(id) {
 
       // If the program should stop
       if (vars["stop"]) {
-        document.getElementById("status").innerHTML = "Stopped."
+        document.getElementById(status).innerHTML = "Stopped."
+        document.getElementById(button).disabled = false;
+        document.getElementById(button).style.backgroundColor = "green";
         console.log("Stopped.");
-        break;
+        return;
       }
 
       // Number of servers that match
@@ -350,10 +352,14 @@ function wb_mapper(id) {
       // If more then 0 servers match
       if (check) {
         document.getElementById(id).innerHTML = str_output;
+        document.getElementById(status).innerHTML = "Finished!";
+        document.getElementById(button).disabled = false;
+        document.getElementById(button).style.backgroundColor = "green";
+
+        // Make the "Alert" appear
         if (document.hidden) {
           document.title = "(1) War Brokers Mapper";
         }
-        document.getElementById("status").innerHTML = "Finished!";
 
         // If playalert is set, play the sound
         if (vars["playalert"]) {
@@ -361,11 +367,21 @@ function wb_mapper(id) {
           audio.play();
         }
 
-        break;
+        return;
       }
 
       // Wait 30 seconds so the server isn't pinged forever
-      await delay(30000)    // DO NOT CHANGE, OR YOUR BROWSER WILL CRASH
+      // DO NOT CHANGE THE 60, OR YOUR BROWSER WILL CRASH
+      for (let i in 60) {
+        await delay(500)        // Check if the program is being stopped every half second
+        if (vars["stop"]) {
+          document.getElementById(status).innerHTML = "Stopped."
+          document.getElementById(button).disabled = false;
+          document.getElementById(button).style.backgroundColor = "green";
+          console.log("Stopped.");
+          return;
+        }
+      }
 
     }
   } catch (error) {
