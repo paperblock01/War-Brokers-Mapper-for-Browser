@@ -15,7 +15,7 @@ async function fetch_server_data(region) {
         break;
       }
       
-      const response = await fetch("https://store1.warbrokers.io/" + str(endpoint) + "//server_list.php?location="+region);
+      const response = await fetch("https://store1.warbrokers.io/" + endpoint + "//server_list.php?location="+region);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
