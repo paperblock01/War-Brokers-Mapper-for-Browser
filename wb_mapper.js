@@ -1,6 +1,10 @@
+// Because the /301//server_list.php changes for some reason >:(
+let endpoint = 301;
+let minguess = 289;
+let maxnumguess = 20;
+
 async function fetch_server_data(region) {
   try {
-    let endpoint = 301;
     let failed = 1;
     let serverdata = [];
 
@@ -9,7 +13,7 @@ async function fetch_server_data(region) {
     
     while (failed) {
       // Could not get the server data
-      if (count == 20) {
+      if (count == maxnumguess) {
         console.error("Something went wrong. Please contact the developer. ")
         break;
       }
@@ -21,8 +25,8 @@ async function fetch_server_data(region) {
         console.log("Endpoint: /" + endpoint + "//server_list.php returned 404. Retrying ...")
 
         if (count < 1) {
-          // Maximize the range of potential numbers in the endpoint
-          endpoint = 289;
+          // Set the start range to minguess 
+          endpoint = minguess;
         }
 
         // Try a different number
