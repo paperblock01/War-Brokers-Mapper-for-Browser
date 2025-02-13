@@ -1,13 +1,52 @@
-const endpoint = "/302//server_list.php";
+const endpoint = 301;
 
 async function fetch_server_data(region) {
   try {
-    const response = await fetch("https://store1.warbrokers.io" + "?location="+region);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+    let failed = 1;
+    let serverdata = [];
+
+    // Count the number of times the request was sent and failed
+    let count = 0;
+    
+    while (failed) {
+      // Could not get the server data
+      if (count = 20) {
+        console.error("Something went wrong. Please contact the developer. ")
+        break;
+      }
+      
+      const response = await fetch("https://store1.warbrokers.io/" + str(endpoint) + "//server_list.php?location="+region);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      // Check if a "File Not Found!" is returned.
+      if (response.status == 404) {
+        console.log("Endpoint: /" + endpoint + "//server_list.php returned 404. Retrying ...")
+
+        if (count < 1) {
+          // Maximize the range of potential numbers in the endpoint
+          endpoint = 289;
+        }
+
+        // Try a different number
+        endpoint += 1;
+        // Increase the count
+        count += 1;
+        
+        console.log("Trying: " + endpoint);
+        continue;
+      }
+
+      // Stop sending requests if success
+      failed = 0;
+      
+      // Order and store the server data in an ordered array.  
+      serverdata = response.text().then(data => data.split(","+region+","));
     }
+    
     // Return the raw server data
-    return response.text().then(data => data.split(","+region+","));
+    return serverdata;
   }
   catch (error) {
     console.error(error);
