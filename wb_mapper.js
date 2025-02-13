@@ -1,7 +1,8 @@
+const endpoint = "/302//server_list.php";
 
 async function fetch_server_data(region) {
   try {
-    const response = await fetch("https://store1.warbrokers.io/295//server_list.php?location="+region);
+    const response = await fetch("https://store1.warbrokers.io" + "?location="+region);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
