@@ -10,7 +10,7 @@ async function fetch_server_data(region) {
     
     while (failed) {
       // Could not get the server data
-      if (count = 20) {
+      if (count == 20) {
         console.error("Something went wrong. Please contact the developer. ")
         break;
       }
