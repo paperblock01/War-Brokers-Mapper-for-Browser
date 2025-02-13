@@ -312,7 +312,7 @@ function output(server_data, index, location) {
 }
 
 function game_check(server_data, set_data, region) {
-  // check is a variable that is set to True when a match is found
+  // check if a variable that is set to True when a match is found
   let check = 0;
   // Stores the string that describes each server that matches
   let str_output = "";
@@ -380,6 +380,12 @@ function wb_mapper(id, status, button) {
         const server_data = await fetch_server_data(settings[4][i]);
         const wb_map = game_check(server_data, settings, settings[4][i]);
 
+        // If the server data could not be fetched
+        if (server_data == []) {
+          document.getElementById(status).innerHTML = "Something went wrong. :( Please contact the developer";
+          break;
+        }
+        
         // Add the number of matching servers to the check variable
         check += wb_map[0];
         // Add the output string
