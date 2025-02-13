@@ -1,4 +1,4 @@
-const endpoint = 301;
+const endpoint = 295;
 
 async function fetch_server_data(region) {
   try {
