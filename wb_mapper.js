@@ -1,7 +1,6 @@
-const endpoint = 295;
-
 async function fetch_server_data(region) {
   try {
+    let endpoint = 295;
     let failed = 1;
     let serverdata = [];
 
@@ -16,9 +15,6 @@ async function fetch_server_data(region) {
       }
       
       const response = await fetch("https://store1.warbrokers.io/" + endpoint + "//server_list.php?location="+region);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
   
       // Check if a "File Not Found!" is returned.
       if (response.status == 404) {
@@ -36,6 +32,11 @@ async function fetch_server_data(region) {
         
         console.log("Trying: " + endpoint);
         continue;
+      }
+
+      // If the request fails for some other reason
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
 
       // Stop sending requests if success
