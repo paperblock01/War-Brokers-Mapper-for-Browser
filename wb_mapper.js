@@ -1,6 +1,6 @@
 async function fetch_server_data(region) {
   try {
-    let endpoint = 295;
+    let endpoint = 301;
     let failed = 1;
     let serverdata = [];
 
