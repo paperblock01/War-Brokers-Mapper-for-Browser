@@ -1,5 +1,5 @@
 // Because the /301//server_list.php changes for some reason >:(
-let endpoint = 301;
+let endpoint = 303;
 let minguess = 289;
 let maxnumguess = 20;
 
