@@ -2,7 +2,7 @@
 
 ~~It can be accessed [here](https://paperblock01.github.io/War-Brokers-Mapper-for-Browser/)~~
 
-New Site: https://coolcoolcool.space/WB/storebrokers
+New Site: https://coolcoolcool.space/WB/wbmapper/
 
 I hope you can figure out how to use it because I don't want to make a detailed README lmao.
 
