@@ -1,6 +1,6 @@
 // Because the /301//server_list.php changes for some reason >:(
-let endpoint = 303;
-let minguess = 289;
+let endpoint = 313;
+let minguess = endpoint - 10;
 let maxnumguess = 20;
 
 async function fetch_server_data(region) {
