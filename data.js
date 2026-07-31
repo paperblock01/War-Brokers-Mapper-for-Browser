@@ -54,6 +54,7 @@ const Maps = {
     "tribute": 18,
     "cyberpunk": 19,
     "zengarden": 43,
+    "Desert Redux": 51,
     "containers": 37,
     "crisscross": 40,
     "dwarfsdungeon": 28,
@@ -93,6 +94,7 @@ const Maps_long = {
     "Tribute": "tribute",
     "Tribute (Cyberpunk)": "cyberpunk",
     "Zen Garden": "zengarden",
+    "Desert Redux": "desertredux",
     "Containers": "containers",
     "Criss Cross": "crisscross",
     "Dwarf's Dungeon": "dwarfsdungeon",
@@ -136,6 +138,7 @@ const Classic_maps = {
     "Tribute": "tribute",
     "Tribute (Cyberpunk)": "cyberpunk",
     "Zen Garden": "zengarden",
+    "Desert Redux": "desertredux",
 };
 const Fourv4_maps = {
     "Containers": "containers",
